@@ -174,14 +174,14 @@ def __initialize_ltwa():
             MULTI_WORD_TERMS = inf_json[LABEL_MULTIWORD]
             CONFLICT_MAP = inf_json[LABEL_CONFLICT]
     except:
-        # Create JSON from TSV.
-        tsv_filepath = os.path.join(os.path.dirname(__file__), "LTWA_{}.tsv".format(LTWA_VERSION))
-        with open(tsv_filepath,'r') as inf:
+        # Create JSON from CSV.
+        csv_filepath = os.path.join(os.path.dirname(__file__), "LTWA_{}.csv".format(LTWA_VERSION))
+        with open(csv_filepath,'r') as inf:
             # Make list of conflict words to gather information about on pass 2
             conflict_words = set()
-            tsv = csv.reader(inf, delimiter='\t')
+            csv = csv.reader(inf, delimiter='\t')
             # Build LTWA dict
-            for line in tsv:
+            for line in csv:
                 word, abbr, langs = line
                 type = __get_type(word)
                 word = __normalize_word(word)
@@ -200,7 +200,7 @@ def __initialize_ltwa():
                 # remove from main list
                 LTWA[type].pop(word)
             inf.seek(0)
-            for line in tsv:
+            for line in csv:
                 word, abbr, langs = line
                 type = __get_type(word)
                 word = __normalize_word(word)
