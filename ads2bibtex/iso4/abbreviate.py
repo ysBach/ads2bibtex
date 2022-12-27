@@ -179,9 +179,9 @@ def __initialize_ltwa():
         with open(csv_filepath,'r') as inf:
             # Make list of conflict words to gather information about on pass 2
             conflict_words = set()
-            csv = csv.reader(inf, delimiter='\t')
+            csvfile = csv.reader(inf, delimiter=';')
             # Build LTWA dict
-            for line in csv:
+            for line in csvfile:
                 word, abbr, langs = line
                 type = __get_type(word)
                 word = __normalize_word(word)
@@ -200,7 +200,7 @@ def __initialize_ltwa():
                 # remove from main list
                 LTWA[type].pop(word)
             inf.seek(0)
-            for line in csv:
+            for line in csvfile:
                 word, abbr, langs = line
                 type = __get_type(word)
                 word = __normalize_word(word)
