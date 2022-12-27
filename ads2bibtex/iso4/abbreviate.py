@@ -146,7 +146,7 @@ def abbreviate(title, periods=True, disambiguation_langs=set()):
 
 
 LTWA = {}
-LTWA_VERSION = "20170914"
+LTWA_VERSION = "20210702"
 
 NOT_ABBREVIATED = "n.a."
 
