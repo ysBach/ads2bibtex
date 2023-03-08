@@ -77,12 +77,12 @@ def main(args=None):
                         default='%R  # %3h_%Y_%q_%V_%p %T %ZAuthorSep:" " ',
                         help=("The output format for the raw file. ")
                         )
-    parser.add_argument("-n", "--num-iter", default=100000, type=int,
-                        help="number of iterations (default=100000 > 50000s=14hr)")
-    parser.add_argument("-t", "--dtime", default=0.5, type=float,
-                        help="time between iterations (default=0.5s)")
-    parser.add_argument("-i", "--info-interval", default=5000, type=int,
-                        help="number of iterations between info prints (default=5000)")
+    parser.add_argument("-n", "--num-iter", default=500, type=int,
+                        help="number of iterations (default=500)")
+    parser.add_argument("-t", "--dtime", default=5, type=float,
+                        help="time between iterations (default=5s)")
+    parser.add_argument("-i", "--info-interval", default=20, type=int,
+                        help="number of iterations between info prints (default=20)")
 
     print("1")
     args = parser.parse_args(args)
