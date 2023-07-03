@@ -4,7 +4,7 @@
 from setuptools import setup, find_packages
 
 setup_requires = []
-install_requires = []
+install_requires = ["nltk"]
 
 classifiers = ["Intended Audience :: Science/Research",
                "Operating System :: OS Independent",
