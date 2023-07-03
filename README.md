@@ -6,34 +6,57 @@ Make ADS style inputs into bibtex file, by querying to NASA ADS.
 # Usage
 Please note that this repo is under a heavy development for my personal use. Currently, the following will work:
 
-    # Simply download entry as bibtex
+## Simply download entry as bibtex
+
     ads2bibtex <library ID> -o outputdir/ref.bib
 
-    # If you have "additional" entry that is not registered to ADS
+## "Additional" Entry
+(If you have a bibtex for things that are not registered to ADS)
+
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/ref.bib
 
-    # If you want ISO4 style journal names (e.g., \apj --> Astrophys. J.)
-    #   use `-j full` for the full journal name
+## ISO4
+If you want ISO4 style journal names (e.g., not ``\apj`` but ``Astrophys. J.``).
+
     ads2bibtex <library ID> -o outputdir/ref.bib -j iso4
 
-    # If you want to save the raw bibcodes as bib_raw.txt
+You may use use `-j full` for the full journal name (``Astrophysicial Journal``):
+
+    ads2bibtex <library ID> -o outputdir/ref.bib -j full
+
+These are useful for, e.g., non-astronomy specific journals (or even thesis).
+
+
+## Less Useful Functionalities
+
+If you want to save the raw bibcodes as bib_raw.txt
+
     ads2bibtex <library ID> -r bib_raw.txt -o outputdir/ref.bib
 
-    # If you want to save the raw bibcodes as bib_raw.txt
-    #   use -F (--format-raw) to set the save style
+If you want to save the raw bibcodes as bib_raw.txt
+
     ads2bibtex <library ID> -r bib_raw.txt -o outputdir/ref.bib
+
+Use ``-F`` (``--format-raw``) to set the save style.
+
 
 
 # Requirements
-- `nltk` (for abbreviation of words)
 - `regex` (also used in `nltk` https://pypi.org/project/regex/)
 - `colorama` (for colorful output on terminal)
 
+To use abbreviation of words (``-j iso4``), you need `nltk`.
+
+## `iso4`
 The `iso4/` is directly adopted from [`adlpr/iso4`](https://github.com/adlpr/iso4), and underwent minor tweak to cope with the more recent LTWA version
 
-ADS provides some example notes ([GitHub](https://github.com/adsabs/adsabs-dev-api), [nbviewer](https://nbviewer.jupyter.org/github/adsabs/adsabs-dev-api/tree/master/)).
 
-Explanations are scattered to many places, such as
+# Other Notes
+ADS provides some example notes:
+* [GitHub](https://github.com/adsabs/adsabs-dev-api)
+* [nbviewer](https://nbviewer.jupyter.org/github/adsabs/adsabs-dev-api/tree/master/)
+
+Explanations are scattered to many places, such as:
 * [Full API Docs](https://ui.adsabs.harvard.edu/help/api/api-docs.html#auth)
 * [Export API](https://nbviewer.jupyter.org/github/adsabs/adsabs-dev-api/blob/master/Export_API.ipynb)
 * [Search API](https://nbviewer.jupyter.org/github/adsabs/adsabs-dev-api/blob/master/Search_API.ipynb): this explains most of the APIs I guess.
