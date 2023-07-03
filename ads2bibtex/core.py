@@ -2,7 +2,7 @@ import json
 import re
 
 import requests
-from iso4 import abbreviate
+from .iso4 import abbreviate
 
 __all__ = ["_check_token", "read_sort_bib_ads", "read_bib_add", "query_ads",
            "query_lib", "make_rawfile", "extract_cite_keys"]
@@ -12,19 +12,22 @@ __all__ = ["_check_token", "read_sort_bib_ads", "read_bib_add", "query_ads",
 # I have no idea why ADS failed to give full list properly... I had to combine
 # their website and style files manually, and expand the abbreviations to full
 # names. See https://ui.adsabs.harvard.edu/help/actions/journal-macros
+# NOTE: apjl/apjs must preceed apj, otherwise apjl will be replaced by, e.g.,
+#   "Astrophysical Journall" (double l at the end). Same for aapr/aaps & aap,
+#   nar/nat & na
 JOURNAL_MACRO = {
     "aas": "American Astronomical Society Meeting Abstracts",
     "aj": "Astronomical Journal",
     "actaa": "Acta Astronomica",
     "araa": "Annual Review of Astron and Astrophysis",
-    "apj": "Astrophysical Journal",
     "apjl": "Astrophysical Journal, Letters",
     "apjs": "Astrophysical Journal, Supplement",
+    "apj": "Astrophysical Journal",
     "ao": "Applied Optics",
     "apss": "Astrophysics and Space Science",
-    "aap": "Astronomy and Astrophysics",
     "aapr": "Astronomy and Astrophysics Reviews",
     "aaps": "Astronomy and Astrophysics, Supplement",
+    "aap": "Astronomy and Astrophysics",
     "aplett": "Astrophysics Letters",
     "apspr": "Astrophysics Space Physics Research",
     "azh": "Astronomicheskii Zhurnal",
@@ -49,9 +52,9 @@ JOURNAL_MACRO = {
     "memras": "Memoirs of the Royal Astronomical Society",
     "memsai": "Mem. Societa Astronomica Italiana",
     "mnras": "Monthly Notices of the Royal Astronomical Society",
-    "na": "New Astronomy",
-    "nar": "New Astronomy Review",
     "nat": "Nature",
+    "nar": "New Astronomy Review",
+    "na": "New Astronomy",
     "nphysa": "Nuclear Physics A",
     "pasa": "Publications of the Astronomical Society of Australia",
     "pasp": "Publications of the Astronomical Society of the Pacific",
@@ -213,6 +216,7 @@ def query_ads(bibcodes, token, options=dict(sort="date asc"), fmt="bibtex",
             raw = re.sub(r"\\{}".format(k), v, raw)
         return raw
     elif journalname == "iso4":
+        # Expand all macros first
         for k, v in JOURNAL_MACRO.items():
             raw = re.sub(r"\\{}".format(k), v, raw)
         lines = raw.split("\n")
@@ -255,7 +259,8 @@ def query_lib(library_id, token, url="https://api.adsabs.harvard.edu/v1/biblib/l
     try:
         _res = r.json()
         meta = _res["metadata"]
-        return _res["documents"], meta["date_last_modified"], "ADS Library: " + meta["name"]
+        return (_res["documents"], meta["date_last_modified"],
+                "ADS Library: " + meta["name"])
     except KeyError:
         raise ValueError("Error in ADS API query. Check your token..? See:", r.json())
 
