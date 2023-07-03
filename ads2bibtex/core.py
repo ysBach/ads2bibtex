@@ -2,7 +2,6 @@ import json
 import re
 
 import requests
-from .iso4 import abbreviate
 
 __all__ = ["_check_token", "read_sort_bib_ads", "read_bib_add", "query_ads",
            "query_lib", "make_rawfile", "extract_cite_keys"]
@@ -216,6 +215,12 @@ def query_ads(bibcodes, token, options=dict(sort="date asc"), fmt="bibtex",
             raw = re.sub(r"\\{}".format(k), v, raw)
         return raw
     elif journalname == "iso4":
+        try:
+            from .iso4 import abbreviate
+        except ImportError:
+            raise ImportError(
+                "Please install `nltk` package to use `iso4` journalname formatter."
+            )
         # Expand all macros first
         for k, v in JOURNAL_MACRO.items():
             raw = re.sub(r"\\{}".format(k), v, raw)
