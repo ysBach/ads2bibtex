@@ -4,6 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 from colorama import Back, Fore, Style
+import json
 
 from ads2bibtex import query_ads, query_lib, read_bib_add, make_rawfile, _check_token
 
@@ -129,7 +130,11 @@ def main(args=None):
     for i in range(args.num_iter):
         adds, adds2 = read_bib_add(arg_add)
         if i != 0:
-            bibs, last_modified, _ = query_lib(arg_ads, token=token)  # only the bibcodes
+            try:
+                bibs, last_modified, _ = query_lib(arg_ads, token=token)
+                # only the bibcodes
+            except json.JSONDecodeError:
+                continue  # if the ADS API is down, just wait for the next iteration
             update = False
         else:
             last_modified = last_modified_old
