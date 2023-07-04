@@ -7,6 +7,7 @@ Make ADS style inputs into bibtex file, by querying to NASA ADS.
 ## First Step (One Time)
 
 <details><summary>API Token (click)</summary>
+
 **Get your own token**
 
 * Go to [NASA ADS](https://ui.adsabs.harvard.edu/)
@@ -18,6 +19,8 @@ Do **NOT** click `Generate a new key` unless you really need it!!
 </details>
 
 <details><summary>Make a Library (click)</summary>
+
+**Make a Library you will use**
 
 * Top right: `Account` → `ADS Libraries`
 * Left: `ADD A LIBRARY` → Set the name of the library (e.g., "PhDT", "everything", "Bach+2023AJ").
