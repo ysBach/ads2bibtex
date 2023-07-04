@@ -3,7 +3,7 @@ Make **ADS library auto-synchronized to the local file** (recommeneded: BibTeX).
 
 
 ## Purpose
-I created this script to reduce the time I waste on creating BibTeX files for multiple journals and my thesis. I did **not** care about the usage when the journals do not support BibTeX. However, this should generally be useful because ADS supports various output formats.
+I created this script to reduce the time I waste on creating BibTeX files for multiple journals and my thesis. I did **not** care about the usage when the journals do not support BibTeX, and that's why the name is `ads2bibtex`. However, this should generally be useful because ADS supports various output formats (See Usage Tips below).
 
 Also, it is intended to be **run in the background** on my terminal while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change by checking the *last-modified timestamp* and updates the local BibTeX file accordingly.
 
@@ -14,7 +14,7 @@ Installation: clone this repo and
 
     $ pip install -e .
 
-Later, you may `git clone`.
+Later, you may `git pull`. Currently `pip install ads2bibtex` is unavailable (to be available 2023 Fall)
 
 <details><summary>API Token (click)</summary>
 
@@ -162,3 +162,5 @@ Explanations are scattered to many places, such as:
 * [Export API](https://nbviewer.jupyter.org/github/adsabs/adsabs-dev-api/blob/master/Export_API.ipynb)
 * [Search API](https://nbviewer.jupyter.org/github/adsabs/adsabs-dev-api/blob/master/Search_API.ipynb): this explains most of the APIs I guess.
 
+### Bugs
+* I sometimes encounter a crash. However, I can just re-run the script and then everything is fine 🤷
