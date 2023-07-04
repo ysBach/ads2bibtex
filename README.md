@@ -6,7 +6,7 @@ Make ADS style inputs into bibtex file, by querying to NASA ADS.
 # Basic Usage
 ## First Step (One Time)
 
-<details><summary>### API Token</summary>
+<details><summary>API Token</summary>
 
 * Go to [NASA ADS](https://ui.adsabs.harvard.edu/)
 * Top right: `Log In`. After logging in...
