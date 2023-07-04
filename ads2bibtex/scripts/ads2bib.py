@@ -6,7 +6,7 @@ from pathlib import Path
 from colorama import Back, Fore, Style
 import json
 
-from ads2bibtex import query_ads, query_lib, read_bib_add, make_rawfile, _check_token
+from ads2bibtex import query_ads, query_lib, read_bib_add, _check_token
 
 DESCRIPTION = """
 Accepts the ADS Library (recommended) or a text file with the ADS-style
@@ -75,8 +75,8 @@ def main(args=None):
                               )
                         )
     parser.add_argument("-F", "--format-raw", type=str,
-                        default='%R  # %3h_%Y_%q_%V_%p %T %ZAuthorSep:" " ',
-                        help=("The output format for the raw file. ")
+                        default='%R  # %3h_%Y_%q_%V_%p %T',
+                        help=("The output format for the raw file. Same as -f/--format")
                         )
     parser.add_argument("-n", "--num-iter", default=500, type=int,
                         help="number of iterations (default=500)")
@@ -85,13 +85,12 @@ def main(args=None):
     parser.add_argument("-i", "--info-interval", default=20, type=int,
                         help="number of iterations between info prints (default=20)")
 
-    print("1")
+    print("Status checkup...\nArguments parse: ", end="")
     args = parser.parse_args(args)
-    print("2")
+    print("Done.\nToken checking: ", end="")
     token = _check_token()
-    print("3")
+    print("Done.\nInitial query test: ", end="")
     arg_ads = args.lib_or_file
-    print("4")
     # if Path(arg_ads).exists():  # If you gave a file with ADS bibcodes
     #     bibs_old = read_sort_bib_ads(arg_ads)  # only the bibcodes
 
@@ -99,7 +98,7 @@ def main(args=None):
     #   bibs, last_modified = query_lib(arg_ads, token=token)
 
     bibs_old, last_modified_old, name = query_lib(arg_ads, token=token)
-    print("5")
+    print("Done.\nUpdating the files...")
     arg_add = args.additional_file
     adds_old, adds2_old = read_bib_add(arg_add)  # the raw file content & list of citekeys
     rawfile = None if args.rawfile == "none" else args.rawfile
@@ -121,10 +120,6 @@ def main(args=None):
         )
 
     bibtex_ads = query_ads(bibs_old, **query_kw)
-    print("6")
-
-    # if rawfile is not None:
-    #     query_ads(bibs_old, **query_kw_raw)
 
     update = True
     for i in range(args.num_iter):
@@ -162,7 +157,11 @@ def main(args=None):
             print(f"Updated: {args.output} \n({datetime.now()})\n")
 
             if rawfile is not None:
-                make_rawfile(bibtex_ads, rawfile)
+                contents_raw = query_ads(bibs_old, **query_kw_raw)
+                with open(rawfile, "w") as ff:
+                    ff.writelines(contents_raw)
+                print(f"Updated: {rawfile} \n({datetime.now()})\n")
+
 
         if (i > 0) and (i % args.info_interval == 0):
             pct = 100 * i / args.num_iter

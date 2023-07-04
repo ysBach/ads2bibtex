@@ -28,17 +28,45 @@ Do **NOT** click `Generate a new key` unless you really need it!!
 </p>
 </details>
 
+Try:
+    ads2bibtex -h
+
 The simplest usage:
 
-    ads2bibtex <library ID> -o outputdir/ref.bib
+    ads2bibtex <library ID> -o Bach+2023_PhDT_SNU/references.bib
 
-This downloads entry as bibtex, using ADS default format
+This downloads entry as bibtex, using ADS default format (bibtex).
+
+## Purpose
+I made this script to **run in background** on my terminal, while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change (last-modified timestamp), and updates the local bibtex file accordingly.
+
 
 ## Advanced Usage
 ### "Additional" Entry
-If you have a bibtex (I save them as `bib_add.txt` file) for things that are not registered to ADS:
+There are things that are not registered to ADS. If you have a bibtex for them (I collect them as `bib_add.txt` file on my computer):
 
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/ref.bib
+
+For example, the contents can be:
+```
+% Contents of bib_add.txt
+@ARTICLE{2022_SAG_NICpolpy,
+       author = {{Bach}, Yoonsoo P. and {Ishiguro}, Masateru and {Takahashi}, Jun and {Geem}, Jooyeon},
+        title = "{Data Reduction Process and Pipeline for the NIC Polarimetry Mode in Python, NICpolpy}",
+      journal = {Stars and Galaxies (arXiv:2212.14167)},
+     keywords = {methods: data analysis, methods: observational, techniques: image processing, techniques: polarimetric},
+         year = 2022,
+        month = dec,
+       volume = {5},
+          eid = {4},
+        pages = {4},
+archivePrefix = {arXiv},
+       eprint = {2212.14167},
+ primaryClass = {astro-ph.IM},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2022arXiv221214167B},
+      adsnote = {}
+}
+```
 
 ### Journal Names
 To save full name of the journals: `-j full`
@@ -55,17 +83,17 @@ These are useful for, e.g., non-astronomy specific journals (or even thesis).
 
 ### Less Useful Functionalities
 
-If you want to save the raw bibcodes as bib_raw.txt
+If you want to save the raw bibcodes as bib_raw.txt:
 
     ads2bibtex <library ID> -r bib_raw.txt -o outputdir/ref.bib
 
-If you want to save the raw bibcodes as bib_raw.txt
+Use ``-f`` (``--format``) or ``-F`` (``--format-raw``) to set the save style of output file and raw file, respectively. By default, ``-f`` is ``"bibtex"`` and ``-F`` is ``%R  # %3h_%Y_%q_%V_%p %T`` (a random testing format I used for debugging).
 
-    ads2bibtex <library ID> -r bib_raw.txt -o outputdir/ref.bib
+    ads2bibtex <library ID> -r bib_raw.txt -o outputdir/ref.bib -F "%R  # %10.5N_%Y_%q_%V_%p %T"
 
-Use ``-F`` (``--format-raw``) to set the save style.
+This is the same as ADS's "Export → Custom Format". See [this help page](http://adsabs.github.io/help/actions/export) of ADS.
 
-
+You can increase/decrease the iteration number
 
 # Requirements
 - `regex` (also used in `nltk` https://pypi.org/project/regex/)
