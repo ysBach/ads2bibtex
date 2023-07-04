@@ -10,13 +10,13 @@ Also, it is intended to be **run in the background** on my terminal while I craw
 
 ## First Step (One Time)
 
-Installation: clone this repo and
+**Installation**: clone this repo and
 
     $ pip install -e .
 
 Later, you may `git pull`. Currently `pip install ads2bibtex` is unavailable (to be available 2023 Fall)
 
-<details><summary>API Token (click)</summary>
+<details><summary><b>API Token</b> (click)</summary>
 
 **Get your own token**
 
@@ -28,7 +28,7 @@ Later, you may `git pull`. Currently `pip install ads2bibtex` is unavailable (to
 Do **NOT** click `Generate a new key` unless you really need it!!
 </details>
 
-<details><summary>Make a Library (click)</summary>
+<details><summary><b>Making a Library</b> (click)</summary>
 
 **Make a Library you will use**
 
