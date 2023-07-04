@@ -109,9 +109,6 @@ def main(args=None):
         journalname=args.journal,
     )
     if rawfile is not None:
-        if args.format != "bibtex":
-            raise ValueError("Currently rawfile is only supported for `-f bibtex`.")
-
         query_kw_raw = dict(
             token=token,
             options=dict(sort=args.sort_option),

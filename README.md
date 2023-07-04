@@ -43,17 +43,17 @@ The simplest usage:
 
     ads2bibtex <library ID> -o ysBach_PhDT_SNU/references.bib
 
-This downloads entry as bibtex, using ADS default format (bibtex).
-
+This downloads entry as bibtex, using ADS default format (bibtex). For different journals use `-f` (see `ads2bibtex -h`).
 
 ## Usage Tips
 ### "Additional" Entry
-There are things that are **not registered to ADS**. If you have a bibtex for them:
+There are things that are **not registered to ADS**. If you have an additional file for them:
 
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/references.bib
 
-<details><summary>contents of my <code>bib_add.txt</code> as an example (click)</summary>
+<details><summary>Contents of my <code>bib_add.txt</code> as an example (click)</summary>
 <p>
+I always use `-f bibtex` as default. Thus, my "additional file" is in BibTeX format:
 
 ```
 % A part of my own bib_add.txt
@@ -89,6 +89,9 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
 </p>
 </details>
 
+* **Important Note**: `ads2bibtex` just copies and pastes the contents of the "additional file" (`-a`, `--additional-file`) at the end of the ADS-queried results. Thus, if you use `-f` option, you must have the "additional file" written in **that specific format**.
+
+
 ### Journal Names
 You want the **full name** of the journals? Use `-j full` to make ``\apj`` → ``Astrophysicial Journal``:
 
@@ -102,6 +105,14 @@ These are useful for, e.g., non-astronomy specific journals like Nature/Science 
 
 
 ### Less Useful Functionalities
+Some tips for other arguments (use ``ads2bibtex -h`` for full help)
+* ``-n`` (``-num-iter``): number of iterations (default=500)
+  * **Warning**: Although I could not find the description, ADS "**limits users to 5000 requests/day (on a rolling 24-hour window)**", and there is no way to circumvent this limit [Lockhart, K. 2023-03-07, priv. comm. via email through help desk].
+* ``-t`` (``--dtime``): time between iterations (default=5s)
+* ``-i`` (``--info-interval``): number of iterations between info prints (default=20)
+
+<details><summary>For debugging purpose...</summary>
+<p>
 
 If you want to save a separate output as *ADS-Export* functionality as ``bib_raw.txt`` for some reason (for me, I made it purely for debugging purpose):
 
@@ -113,11 +124,8 @@ Use ``-f`` or ``-F`` (``--format`` or ``--format-raw``) to set the save style of
 
 This is the same as ADS's "Export → Custom Format". See [this help page](http://adsabs.github.io/help/actions/export) of ADS.
 
-Some tips for other arguments (use ``ads2bibtex -h`` for full help)
-* ``-n`` (``-num-iter``): number of iterations (default=500)
-  * **Warning**: Although I could not find the description, ADS "**limits users to 5000 requests/day (on a rolling 24-hour window)**", and there is no way to circumvent this limit [Lockhart, K. 2023-03-07, priv. comm. via email through help desk].
-* ``-t`` (``--dtime``): time between iterations (default=5s)
-* ``-i`` (``--info-interval``): number of iterations between info prints (default=20)
+</p>
+</details>
 
 
 ## Requirements
