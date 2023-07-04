@@ -52,7 +52,7 @@ There are things that are not registered to ADS. If you have a bibtex for them (
 
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/references.bib
 
-<details><summary>contents of my <pre>bib_add.txt</pre> as an example (click)</summary>
+<details><summary>contents of my <code>bib_add.txt</code> as an example (click)</summary>
 <p>
 
 ```
