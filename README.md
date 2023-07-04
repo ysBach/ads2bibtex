@@ -29,7 +29,7 @@ Do **NOT** click `Generate a new key` unless you really need it!!
 </p>
 </details>
 
-Simply download entry as bibtex
+The simplest usage: Simply download entry as bibtex
 
     ads2bibtex <library ID> -o outputdir/ref.bib
 
