@@ -6,17 +6,25 @@ Make ADS style inputs into bibtex file, by querying to NASA ADS.
 # Basic Usage
 ## First Step (One Time)
 
-<details><summary>API Token</summary>
+<details><summary>API Token (click)</summary>
+**Get your own token**
 
 * Go to [NASA ADS](https://ui.adsabs.harvard.edu/)
 * Top right: `Log In`. After logging in...
-* Top right: `Account` → `ADS Libraries`
+* Top right: `Account` → `Settings`
+* Left: `API Token`
 
-
+Do **NOT** click `Generate a new key` unless you really need it!!
 </details>
+
+<details><summary>Make a Library (click)</summary>
+
 * Top right: `Account` → `ADS Libraries`
 * Left: `ADD A LIBRARY` → Set the name of the library (e.g., "PhDT", "everything", "Bach+2023AJ").
-* Select `Manage Access` Tanl
+* Select `Manage Access` Tab → copy <Library ID>: ``https://ui.adsabs.harvard.edu/public-libraries/<Library ID>``
+
+</p>
+</details>
 
 Simply download entry as bibtex
 
