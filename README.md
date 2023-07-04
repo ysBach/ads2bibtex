@@ -28,7 +28,11 @@ Do **NOT** click `Generate a new key` unless you really need it!!
 </p>
 </details>
 
+
+## Test usage
+
 Try:
+
     ads2bibtex -h
 
 The simplest usage:
@@ -38,16 +42,19 @@ The simplest usage:
 This downloads entry as bibtex, using ADS default format (bibtex).
 
 ## Purpose
-I made this script to **run in background** on my terminal, while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change (last-modified timestamp), and updates the local bibtex file accordingly.
+I created this script to **run in the background** on my terminal while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change by checking the *last-modified timestamp* and updates the local BibTeX file accordingly.
 
 
-## Advanced Usage
+## Usage Tips
 ### "Additional" Entry
 There are things that are not registered to ADS. If you have a bibtex for them (I collect them as `bib_add.txt` file on my computer):
 
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/ref.bib
 
 For example, the contents can be:
+<details><summary>contents of my ``bib_add.txt`` (click)</summary>
+<p>
+
 ```
 % Contents of bib_add.txt
 @ARTICLE{2022_SAG_NICpolpy,
@@ -66,7 +73,21 @@ archivePrefix = {arXiv},
        adsurl = {https://ui.adsabs.harvard.edu/abs/2022arXiv221214167B},
       adsnote = {}
 }
+
+@INPROCEEDINGS{gil-hutton-data,
+title= {Catalogue of asteroid polarization curves},
+author = {Gil-Hutton, R.},
+year = {2017},
+booktitle= {ACM (Asteroid, Comets, Meteors) 2017, Montevideo},
+pages={Poster1.d.17},
+URL= {http://gcpsj.sdf-eu.org/catalogo.html},
+       adsurl = {},
+      adsnote = {}
+}
 ```
+
+</p>
+</details>
 
 ### Journal Names
 To save full name of the journals: `-j full`
