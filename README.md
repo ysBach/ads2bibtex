@@ -1,14 +1,16 @@
 # ads2bibtex
-Make ADS style inputs into BibTeX file, by querying to NASA ADS.
+Make ADS library auto-synchronized to the local file (recommeneded: BibTeX).
 
-I created this script to reduce the time I waste on creating BibTeX files for multiple journals and my thesis. I did **not** care about the usage when the journals do not support BibTeX. However, this should generally be useful because ADS supports various output formats.
 
 ## Purpose
-I created this script to **run in the background** on my terminal while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change by checking the *last-modified timestamp* and updates the local BibTeX file accordingly.
+I created this script to reduce the time I waste on creating BibTeX files for multiple journals and my thesis. I did **not** care about the usage when the journals do not support BibTeX. However, this should generally be useful because ADS supports various output formats.
+
+Also, it is intended to be **run in the background** on my terminal while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change by checking the *last-modified timestamp* and updates the local BibTeX file accordingly.
 
 
 ## First Step (One Time)
 
+Installation: clone this repo and
 <details><summary>API Token (click)</summary>
 
 **Get your own token**
@@ -43,7 +45,7 @@ The simplest usage:
 
     ads2bibtex <library ID> -o ysBach_PhDT_SNU/references.bib
 
-This downloads entry as bibtex, using ADS default format (bibtex). For different journals use `-f` (see `ads2bibtex -h`).
+Paste your API token if asked. It will be saved as `.ads-token` file for later use. This then downloads entry as bibtex, using ADS default format (bibtex). For different journals/formats other than BibTeX, use `-f` (see `ads2bibtex -h`).
 
 ## Usage Tips
 ### "Additional" Entry
