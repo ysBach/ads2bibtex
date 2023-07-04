@@ -1,7 +1,7 @@
 # ads2bibtex
-Make ADS style inputs into bibtex file, by querying to NASA ADS.
+Make ADS style inputs into BibTeX file, by querying to NASA ADS.
 
-I created this script to reduce the time I waste on creating BibTeX files for multiple journals and my thesis.
+I created this script to reduce the time I waste on creating BibTeX files for multiple journals and my thesis. I did **not** care about the usage when the journals do not support BibTeX. However, this should generally be useful because ADS supports various output formats.
 
 ## Purpose
 I created this script to **run in the background** on my terminal while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change by checking the *last-modified timestamp* and updates the local BibTeX file accordingly.
@@ -89,7 +89,7 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
 </p>
 </details>
 
-* **Important Note**: `ads2bibtex` just copies and pastes the contents of the "additional file" (`-a`, `--additional-file`) at the end of the ADS-queried results. Thus, if you use `-f` option, you must have the "additional file" written in **that specific format**.
+* **Important Note**: `ads2bibtex` just copies and pastes the contents of the "additional file" (`-a`, `--additional-file`) at the end of the ADS-queried results. Thus, you must have the "additional file" written in a **specific format** that matches `-f` option you provided.
 
 
 ### Journal Names
