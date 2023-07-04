@@ -4,6 +4,20 @@ Make ADS style inputs into bibtex file, by querying to NASA ADS.
 **Warning**: Although I could not find the description, ADS ``limits users to 5000 requests/day (on a rolling 24-hour window)`` [Lockhart, K. 2023-03-07, priv. comm.].
 
 # Basic Usage
+## First Step (One Time)
+
+<details><summary>### API Token</summary>
+
+* Go to [NASA ADS](https://ui.adsabs.harvard.edu/)
+* Top right: `Log In`. After logging in...
+* Top right: `Account` → `ADS Libraries`
+
+
+</details>
+* Top right: `Account` → `ADS Libraries`
+* Left: `ADD A LIBRARY` → Set the name of the library (e.g., "PhDT", "everything", "Bach+2023AJ").
+* Select `Manage Access` Tanl
+
 Simply download entry as bibtex
 
     ads2bibtex <library ID> -o outputdir/ref.bib
