@@ -48,7 +48,7 @@ This downloads entry as bibtex, using ADS default format (bibtex).
 
 ## Usage Tips
 ### "Additional" Entry
-There are things that are not registered to ADS. If you have a bibtex for them (I collect them as `bib_add.txt` file on my computer):
+There are things that are **not registered to ADS**. If you have a bibtex for them:
 
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/references.bib
 
@@ -90,12 +90,11 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
 </details>
 
 ### Journal Names
-To use the **full name** of the journals: `-j full`
-(``\apj`` → ``Astrophysicial Journal``):
+You want the **full name** of the journals? Use `-j full` to make ``\apj`` → ``Astrophysicial Journal``:
 
     ads2bibtex <library ID> -o outputdir/references.bib -j full
 
-If you want **ISO4 style** journal names in the output (e.g., not ``\apj`` but ``Astrophys. J.``), you need to install `nltk`:
+You want **ISO4 style**? You need to install `nltk` and use `-j iso4` to make ``\apj`` → ``Astrophys. J.``:
 
     ads2bibtex <library ID> -o outputdir/references.bib -j iso4
 
