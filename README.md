@@ -34,7 +34,7 @@ Do **NOT** click `Generate a new key` unless you really need it!!
 
 * Top right: `Account` → `ADS Libraries`
 * Left: `ADD A LIBRARY` → Set the name of the library (e.g., "PhDT", "everything", "Bach+2023AJ").
-* Select `Manage Access` Tab → copy <Library ID>: ``https://ui.adsabs.harvard.edu/public-libraries/<Library ID>``
+* Select `Manage Access` Tab → copy `Library ID`: ``https://ui.adsabs.harvard.edu/public-libraries/<Library ID>``
 
 </p>
 </details>
