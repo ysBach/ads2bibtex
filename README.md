@@ -53,7 +53,9 @@ The simplest usage:
 * Paste your API token if asked. It will be saved as `.ads-token` file for later use.
 * If you regenerated the token, simply `rm .ads-token`.
 
-This then downloads entry as bibtex, using ADS default format (bibtex). For different journals/formats other than BibTeX, use `-f` (see `ads2bibtex -h`).
+This then downloads entry as bibtex, using ADS default format (bibtex).
+
+For **different journals/formats other than BibTeX**, use `-f` (see `ads2bibtex -h`).
 
 ## Usage Tips
 ### "Additional" Entry
@@ -148,7 +150,7 @@ To use abbreviation of words (``-j iso4``), you need `nltk`.
 ## Other Notes
 
 ### `iso4`
-The `iso4/` is directly adopted from [`adlpr/iso4`](https://github.com/adlpr/iso4), and underwent minor tweak to cope with the more recent LTWA version.
+The `iso4/` is directly adopted from [`adlpr/iso4`](https://github.com/adlpr/iso4) (MIT license), and underwent minor tweaks to cope with the more recent LTWA version.
 
 The Abbreviation file from LTWA (version 2021-07-02, retrieved 2022-12-27): http://www.issn.org/services/online-services/access-to-the-ltwa/
 
