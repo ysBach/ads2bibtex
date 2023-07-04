@@ -1,5 +1,5 @@
 # ads2bibtex
-Make ADS library auto-synchronized to the local file (recommeneded: BibTeX).
+Make **ADS library auto-synchronized to the local file** (recommeneded: BibTeX).
 
 
 ## Purpose
@@ -45,7 +45,9 @@ The simplest usage:
 
     ads2bibtex <library ID> -o ysBach_PhDT_SNU/references.bib
 
-Paste your API token if asked. It will be saved as `.ads-token` file for later use. This then downloads entry as bibtex, using ADS default format (bibtex). For different journals/formats other than BibTeX, use `-f` (see `ads2bibtex -h`).
+* Paste your API token if asked. It will be saved as `.ads-token` file for later use.
+
+This then downloads entry as bibtex, using ADS default format (bibtex). For different journals/formats other than BibTeX, use `-f` (see `ads2bibtex -h`).
 
 ## Usage Tips
 ### "Additional" Entry
