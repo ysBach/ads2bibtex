@@ -90,7 +90,7 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
 </details>
 
 ### Journal Names
-To save **full name** of the journals: `-j full`
+To use the **full name** of the journals: `-j full`
 (``\apj`` → ``Astrophysicial Journal``):
 
     ads2bibtex <library ID> -o outputdir/references.bib -j full
@@ -99,7 +99,7 @@ If you want **ISO4 style** journal names in the output (e.g., not ``\apj`` but `
 
     ads2bibtex <library ID> -o outputdir/references.bib -j iso4
 
-These are useful for, e.g., non-astronomy specific journals (or even thesis).
+These are useful for, e.g., non-astronomy specific journals like Nature/Science (or even thesis).
 
 
 ### Less Useful Functionalities
@@ -116,7 +116,7 @@ This is the same as ADS's "Export → Custom Format". See [this help page](http:
 
 Some tips for other arguments (use ``ads2bibtex -h`` for full help)
 * ``-n`` (``-num-iter``): number of iterations (default=500)
-  * **Warning**: Although I could not find the description, ADS ``limits users to 5000 requests/day (on a rolling 24-hour window)`` [Lockhart, K. 2023-03-07, priv. comm.].
+  * **Warning**: Although I could not find the description, ADS "**limits users to 5000 requests/day (on a rolling 24-hour window)**", and there is no way to circumvent this limit [Lockhart, K. 2023-03-07, priv. comm. via email through help desk].
 * ``-t`` (``--dtime``): time between iterations (default=5s)
 
 
