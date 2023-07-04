@@ -11,6 +11,11 @@ Also, it is intended to be **run in the background** on my terminal while I craw
 ## First Step (One Time)
 
 Installation: clone this repo and
+
+    $ pip install -e .
+
+Later, you may `git clone`.
+
 <details><summary>API Token (click)</summary>
 
 **Get your own token**
@@ -46,6 +51,7 @@ The simplest usage:
     ads2bibtex <library ID> -o ysBach_PhDT_SNU/references.bib
 
 * Paste your API token if asked. It will be saved as `.ads-token` file for later use.
+* If you regenerated the token, simply `rm .ads-token`.
 
 This then downloads entry as bibtex, using ADS default format (bibtex). For different journals/formats other than BibTeX, use `-f` (see `ads2bibtex -h`).
 
