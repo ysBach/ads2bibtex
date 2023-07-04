@@ -1,6 +1,7 @@
 # ads2bibtex
 Make ADS style inputs into bibtex file, by querying to NASA ADS.
 
+I created this script to reduce the time I waste on creating BibTeX files for multiple journals and my thesis.
 
 ## Purpose
 I created this script to **run in the background** on my terminal while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change by checking the *last-modified timestamp* and updates the local BibTeX file accordingly.
@@ -32,7 +33,7 @@ Do **NOT** click `Generate a new key` unless you really need it!!
 </details>
 
 
-## Test usage
+## First Usage
 
 Try:
 
@@ -104,11 +105,11 @@ These are useful for, e.g., non-astronomy specific journals like Nature/Science 
 
 ### Less Useful Functionalities
 
-If you want to save the raw bibcodes as bib_raw.txt:
+If you want to save a separate output as *ADS-Export* functionality as ``bib_raw.txt`` for some reason (for me, I made it purely for debugging purpose):
 
     ads2bibtex <library ID> -r bib_raw.txt -o outputdir/references.bib
 
-Use ``-f`` (``--format``) or ``-F`` (``--format-raw``) to set the save style of output file and raw file, respectively. By default, ``-f`` is ``"bibtex"`` and ``-F`` is ``%R  # %3h_%Y_%q_%V_%p %T`` (a random testing format I used for debugging).
+Use ``-f`` or ``-F`` (``--format`` or ``--format-raw``) to set the save style of output file and raw file, respectively. By default, ``-f`` is ``"bibtex"`` and ``-F`` is ``%R  # %3h_%Y_%q_%V_%p %T`` (a random testing format I used for debugging).
 
     ads2bibtex <library ID> -r bib_raw.txt -o outputdir/references.bib -F "%R  # %10.5N_%Y_%q_%V_%p %T"
 
@@ -118,6 +119,7 @@ Some tips for other arguments (use ``ads2bibtex -h`` for full help)
 * ``-n`` (``-num-iter``): number of iterations (default=500)
   * **Warning**: Although I could not find the description, ADS "**limits users to 5000 requests/day (on a rolling 24-hour window)**", and there is no way to circumvent this limit [Lockhart, K. 2023-03-07, priv. comm. via email through help desk].
 * ``-t`` (``--dtime``): time between iterations (default=5s)
+* ``-i`` (``--info-interval``): number of iterations between info prints (default=20)
 
 
 ## Requirements
