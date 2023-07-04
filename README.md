@@ -3,7 +3,6 @@ Make ADS style inputs into bibtex file, by querying to NASA ADS.
 
 **Warning**: Although I could not find the description, ADS ``limits users to 5000 requests/day (on a rolling 24-hour window)`` [Lockhart, K. 2023-03-07, priv. comm.].
 
-# Basic Usage
 ## First Step (One Time)
 
 <details><summary>API Token (click)</summary>
@@ -29,9 +28,11 @@ Do **NOT** click `Generate a new key` unless you really need it!!
 </p>
 </details>
 
-The simplest usage: Simply download entry as bibtex
+The simplest usage:
 
     ads2bibtex <library ID> -o outputdir/ref.bib
+
+This downloads entry as bibtex, using ADS default format
 
 ## Advanced Usage
 ### "Additional" Entry
