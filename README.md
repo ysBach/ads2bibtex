@@ -33,24 +33,26 @@ The simplest usage: Simply download entry as bibtex
 
     ads2bibtex <library ID> -o outputdir/ref.bib
 
-## "Additional" Entry
-(If you have a bibtex for things that are not registered to ADS)
+## Advanced Usage
+### "Additional" Entry
+If you have a bibtex (I save them as `bib_add.txt` file) for things that are not registered to ADS:
 
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/ref.bib
 
-## ISO4
-If you want ISO4 style journal names (e.g., not ``\apj`` but ``Astrophys. J.``).
-
-    ads2bibtex <library ID> -o outputdir/ref.bib -j iso4
-
-You may use use `-j full` for the full journal name (``Astrophysicial Journal``):
+### Journal Names
+To save full name of the journals: `-j full`
+(``\apj`` → ``Astrophysicial Journal``):
 
     ads2bibtex <library ID> -o outputdir/ref.bib -j full
+
+If you want ISO4 style journal names in the output (e.g., not ``\apj`` but ``Astrophys. J.``), you need to install `nltk`:
+
+    ads2bibtex <library ID> -o outputdir/ref.bib -j iso4
 
 These are useful for, e.g., non-astronomy specific journals (or even thesis).
 
 
-## Less Useful Functionalities
+### Less Useful Functionalities
 
 If you want to save the raw bibcodes as bib_raw.txt
 
@@ -70,11 +72,13 @@ Use ``-F`` (``--format-raw``) to set the save style.
 
 To use abbreviation of words (``-j iso4``), you need `nltk`.
 
+
+# Other Notes
+
 ## `iso4`
 The `iso4/` is directly adopted from [`adlpr/iso4`](https://github.com/adlpr/iso4), and underwent minor tweak to cope with the more recent LTWA version
 
 
-# Other Notes
 ADS provides some example notes:
 * [GitHub](https://github.com/adsabs/adsabs-dev-api)
 * [nbviewer](https://nbviewer.jupyter.org/github/adsabs/adsabs-dev-api/tree/master/)
