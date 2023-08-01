@@ -1,12 +1,13 @@
 import argparse
+import json
 import time
 from datetime import datetime
 from pathlib import Path
 
 from colorama import Back, Fore, Style
-import json
 
-from ads2bibtex import query_ads, query_lib, read_bib_add, _check_token
+from ads2bibtex import (_check_token, change_journal_name, query_ads,
+                        query_lib, read_bib_add)
 
 DESCRIPTION = """
 Accepts the ADS Library (recommended) or a text file with the ADS-style
@@ -57,20 +58,25 @@ def main(args=None):
     parser.add_argument("-s", "--sort-option", default="date asc",
                         help="Sort option for ADS API. Default: `'date asc'`")
     parser.add_argument("-j", "--journal", default="ads", type=str,
-                        help=("Journal name for the ADS API. One of [ads, full, iso4]. "
+                        help=("Journal name for the output BibTeX. (also applied to the"
+                              + "additional-file. It has no effect on additional-file when "
+                              + "it is not `ads`). "
+                              + "Use one of [ads, full, iso4]. "
                               + "Default: `'ads'` (uses ADS macros, e.g., `\\apj`). "
                               + "`'full'` uses full journal names (e.g., `The "
-                              + "Astrophysical Journal`). `'iso4'` uses ISO 4 journal "
-                              + "names (e.g., `Astrophys. J.`)."
+                              + "Astrophysical Journal`)."
+                              + "`'iso4'` uses ISO-4 style names (e.g., `Astrophys. J.`)."
                               )
                         )
     parser.add_argument("-f", "--format", default="bibtex", type=str,
-                        help=("The output format of the bibliography item. "
-                              + "Options are tagged formats (ads, bibtex, bibtexabs, "
-                              + "endnote, medlars, procite, refworks, ris), LaTeX formats "
-                              + "(aastex, icarus, mnras, soph), and XML formats (dcxml, "
-                              + "refxml, refabsxml, rss, votable). Any other string will "
-                              + "be understood as `custom` formatting. For custom, see: "
+                        help=("The format of the `journal` in bibliography item when "
+                              + "downloading the library from ADS. Options are "
+                              + "tagged formats (ads, bibtex, bibtexabs, endnote, medlars, "
+                              + "procite, refworks, ris), "
+                              + "LaTeX formats (aastex, icarus, mnras, soph), "
+                              + "and XML formats (dcxml, refxml, refabsxml, rss, votable). "
+                              + "Any other string will be understood as `custom` "
+                              + "formatting. For custom, see: "
                               + "http://adsabs.github.io/help/actions/export"
                               )
                         )
@@ -84,9 +90,15 @@ def main(args=None):
                         help="time between iterations (default=5s)")
     parser.add_argument("-i", "--info-interval", default=20, type=int,
                         help="number of iterations between info prints (default=20)")
+    parser.add_argument("--add-as-is", action="store_true", default=False,
+                        help=("Add the additional file as is, without expanding journal "
+                              + "name macro, ISO4-styling, etc.")
+                        )
 
     print("Status checkup...\nArguments parse: ", end="")
     args = parser.parse_args(args)
+    print(args)
+
     print("Done.\nToken checking: ", end="")
     token = _check_token()
     print("Done.\nInitial query test: ", end="")
@@ -148,7 +160,10 @@ def main(args=None):
             with open(args.output, "w+") as ff:
                 ff.writelines(bibtex_ads)
                 try:
-                    ff.writelines(adds)
+                    if args.add_as_is:
+                        ff.writelines(adds)
+                    else:
+                        ff.writelines(change_journal_name(adds, journalname=args.journal))
                 except FileNotFoundError:
                     pass
             print(f"Updated: {args.output} \n({datetime.now()})\n")
@@ -158,7 +173,6 @@ def main(args=None):
                 with open(rawfile, "w") as ff:
                     ff.writelines(contents_raw)
                 print(f"Updated: {rawfile} \n({datetime.now()})\n")
-
 
         if (i > 0) and (i % args.info_interval == 0):
             pct = 100 * i / args.num_iter

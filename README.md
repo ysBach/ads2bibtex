@@ -16,9 +16,7 @@ Also, it is intended to be **run in the background** on my terminal while I craw
 
 Later, you may `git pull`. Currently `pip install ads2bibtex` is unavailable (to be available 2023 Fall)
 
-<details><summary><b>API Token</b> (click)</summary>
-
-**Get your own token**
+<details><summary><b>How to get the API Token?</b> (click)</summary>
 
 * Go to [NASA ADS](https://ui.adsabs.harvard.edu/)
 * Top right: `Log In`. After logging in...
@@ -28,9 +26,7 @@ Later, you may `git pull`. Currently `pip install ads2bibtex` is unavailable (to
 Do **NOT** click `Generate a new key` unless you really need it!!
 </details>
 
-<details><summary><b>Making a Library</b> (click)</summary>
-
-**Make a Library you will use**
+<details><summary><b>How do I make an ADS Library?</b> (click)</summary>
 
 * Top right: `Account` → `ADS Libraries`
 * Left: `ADD A LIBRARY` → Set the name of the library (e.g., "PhDT", "everything", "Bach+2023AJ").
@@ -43,16 +39,16 @@ See [this](http://adsabs.github.io/help/libraries/creating-libraries) to learn h
 
 ## First Usage
 
-Try:
+1. To get all help messages:
 
     ads2bibtex -h
 
-The simplest usage:
+2. The simplest usage:
 
     ads2bibtex <library ID> -o ysBach_PhDT_SNU/references.bib
 
-* Paste your API token if asked. It will be saved as `.ads-token` file for later use.
-* If you regenerated the token, simply `rm .ads-token`.
+* *NOTE*: Paste your API token if asked. It will be saved as `.ads-token` file for later use.
+* *NOTE*: To update the token, simply `rm .ads-token`.
 
 This then downloads entry as bibtex, using ADS default format (bibtex).
 
@@ -102,7 +98,8 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
 </p>
 </details>
 
-* **Important Note**: `ads2bibtex` just copies and pastes the contents of the "additional file" (`-a`, `--additional-file`) at the end of the ADS-queried results. Thus, you must have the "additional file" written in a **specific format** that matches `-f` option you provided.
+* **Important Note**: The journal names in the additional file (`-a`, `--additional-file`) will **also be changed** based on `-j` (`--journal`) option.
+* **Important Note**: Note that "full journal name → ADS MACRO" is designed to be impossible (why not use ADS entry?). To simply append the additional file to the resulting BibTeX without altering `journal` field, use `-j ads` option, which is the default.
 
 
 ### Journal Names
@@ -149,6 +146,8 @@ To use abbreviation of words (``-j iso4``), you need `nltk`.
 
 
 ## Other Notes
+### TODO?
+At the moment, you cannot change the original journal name into the ADS style macro. (macro -> full/iso4 is possible).
 
 ### `iso4`
 The `iso4/` is directly adopted from [`adlpr/iso4`](https://github.com/adlpr/iso4) (MIT license), and underwent minor tweaks to cope with the more recent LTWA version.

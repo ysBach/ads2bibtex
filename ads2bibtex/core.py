@@ -3,7 +3,8 @@ import re
 
 import requests
 
-__all__ = ["_check_token", "read_sort_bib_ads", "read_bib_add", "query_ads",
+__all__ = ["_check_token", "change_journal_name",
+           "read_sort_bib_ads", "read_bib_add", "query_ads",
            "query_lib", "make_rawfile", "extract_cite_keys"]
 
 
@@ -92,6 +93,43 @@ def _check_token():
             ff.write(token)
         print("Token saved in file `.ads-token`\n\n")
     return token
+
+
+def _iso4fy_journals(raw_bibtex_text):
+    try:
+        from .iso4 import abbreviate
+    except ImportError:
+        raise ImportError(
+            "Please install `nltk` package to use `iso4` journalname formatter."
+        )
+    # Expand all macros first
+    lines = raw_bibtex_text.split("\n")
+    for i, line in enumerate(lines):
+        if line.strip().startswith("journal"):
+            fullname = line.strip().split("{")[1].split("}")[0]
+            abbrname = abbreviate(fullname, periods=True)
+            lines[i] = line.replace(fullname, abbrname)
+            # FIXME: When "Exception: Ambiguous word in title:" happens, we need to
+            #   put, e.g., disambiguation_langs=['eng']. However, after updating to
+            #   2021-07-02 LTWA version, I cannot see this exception happening.
+    return "\n".join(lines)
+
+
+def _expand_macros(raw_bibtex_text):
+    for k, v in JOURNAL_MACRO.items():
+        raw_bibtex_text = re.sub(r"\\{}".format(k), v, raw_bibtex_text)
+    return raw_bibtex_text
+
+
+def change_journal_name(raw_bibtex_text, journalname="ads"):
+    if journalname == "ads":
+        return raw_bibtex_text
+    elif journalname == "full":
+        return _expand_macros(raw_bibtex_text)
+    elif journalname == "iso4":
+        return _iso4fy_journals(_expand_macros(raw_bibtex_text))
+    else:
+        raise ValueError("Unknown journalname formatter: {}".format(journalname))
 
 
 def read_sort_bib_ads(fname, sort=False):
@@ -208,34 +246,7 @@ def query_ads(bibcodes, token, options=dict(sort="date asc"), fmt="bibtex",
     except KeyError:
         raise ValueError("Error in ADS API query. Check your token..? See:", r.json())
 
-    if journalname == "ads":
-        return raw
-    elif journalname == "full":
-        for k, v in JOURNAL_MACRO.items():
-            raw = re.sub(r"\\{}".format(k), v, raw)
-        return raw
-    elif journalname == "iso4":
-        try:
-            from .iso4 import abbreviate
-        except ImportError:
-            raise ImportError(
-                "Please install `nltk` package to use `iso4` journalname formatter."
-            )
-        # Expand all macros first
-        for k, v in JOURNAL_MACRO.items():
-            raw = re.sub(r"\\{}".format(k), v, raw)
-        lines = raw.split("\n")
-        for i, line in enumerate(lines):
-            if line.strip().startswith("journal = "):
-                fullname = line.strip().split("{")[1].split("}")[0]
-                abbrname = abbreviate(fullname, periods=True)
-                lines[i] = line.replace(fullname, abbrname)
-                # FIXME: When "Exception: Ambiguous word in title:" happens, we need to
-                #   put, e.g., disambiguation_langs=['eng']. However, after updating to
-                #   2021-07-02 LTWA version, I cannot see this exception happening.
-        return "\n".join(lines)
-    else:
-        raise ValueError("Unknown journalname formatter: {}".format(journalname))
+    return change_journal_name(raw, journalname=journalname)
 
 
 def query_lib(library_id, token, url="https://api.adsabs.harvard.edu/v1/biblib/libraries/"):
