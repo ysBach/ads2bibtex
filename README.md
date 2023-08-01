@@ -40,13 +40,14 @@ See [this](http://adsabs.github.io/help/libraries/creating-libraries) to learn h
 ## First Usage
 
 1. To get all help messages:
-
+    ```
     ads2bibtex -h
+    ```
 
 2. The simplest usage:
-
+    ```
     ads2bibtex <library ID> -o ysBach_PhDT_SNU/references.bib
-
+    ```
 * *NOTE*: Paste your API token if asked. It will be saved as `.ads-token` file for later use.
 * *NOTE*: To update the token, simply `rm .ads-token`.
 
