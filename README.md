@@ -51,7 +51,7 @@ See [this](http://adsabs.github.io/help/libraries/creating-libraries) to learn h
 * *NOTE*: Paste your API token if asked. It will be saved as `.ads-token` file for later use.
 * *NOTE*: To update the token, simply `rm .ads-token`.
 
-This then downloads entry as bibtex, using ADS default format (bibtex).
+This then downloads entry as bibtex, using ADS default format (the default ``-f bibtex``).
 
 For **different journals/formats other than BibTeX**, use `-f` (see `ads2bibtex -h`).
 
@@ -100,7 +100,8 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
 </details>
 
 * **Important Note**: The journal names in the additional file (`-a`, `--additional-file`) will **also be changed** based on `-j` (`--journal`) option.
-* **Important Note**: Note that "full journal name → ADS MACRO" is designed to be impossible (why not use ADS entry?). To simply append the additional file to the resulting BibTeX without altering `journal` field, use `-j ads` option, which is the default.
+* **Important Note**: Note that "full/ISO-4 journal name → ADS macro (e.g., ``\apj``)" is *designed to be impossible* (why not use ADS entry?).
+  * To simply append the additional file to the resulting BibTeX without altering the contents of `journal = {}` field, use `-j ads` option, which is the default.
 
 
 ### Journal Names
