@@ -36,18 +36,22 @@ See [this](http://adsabs.github.io/help/libraries/creating-libraries) to learn h
 </p>
 </details>
 
+Check if installed by printing all the help messages:
 
-## First Usage
-
-1. To get all help messages:
-    ```
     ads2bibtex -h
-    ```
 
-2. The simplest usage:
+
+## Usage
+1. The simplest usage:
     ```
     ads2bibtex <library ID> -o ysBach_PhDT_SNU/references.bib
     ```
+
+2. My intentention when I made this package (see "Additional" Entry section below):
+    ```
+    ads2bibtex <library ID> -a bib_add.txt -o ../ysBach_PhDT_SNU/references.bib
+    ```
+
 * *NOTE*: Paste your API token if asked. It will be saved as `.ads-token` file for later use.
 * *NOTE*: To update the token, simply `rm .ads-token`.
 
@@ -55,8 +59,7 @@ This then downloads entry as bibtex, using ADS default format (the default ``-f 
 
 For **different journals/formats other than BibTeX**, use `-f` (see `ads2bibtex -h`).
 
-## Usage Tips
-### "Additional" Entry
+## "Additional" Entry
 There are things that are **not registered to ADS**. If you have an additional file for them:
 
     ads2bibtex <library ID> -a bib_add.txt -o outputdir/references.bib
@@ -104,7 +107,7 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
   * To simply append the additional file to the resulting BibTeX without altering the contents of `journal = {}` field, use `-j ads` option, which is the default.
 
 
-### Journal Names
+## Journal Names
 You want the **full name** of the journals? Use `-j full` to make ``\apj`` → ``Astrophysicial Journal``:
 
     ads2bibtex <library ID> -o outputdir/references.bib -j full
@@ -116,7 +119,7 @@ You want **ISO4 style**? You need to install `nltk` and use `-j iso4` to make ``
 These are useful for, e.g., non-astronomy specific journals like Nature/Science (or even thesis).
 
 
-### Less Useful Functionalities
+## Less Useful Functionalities
 Some tips for other arguments (use ``ads2bibtex -h`` for full help)
 * ``-n`` (``-num-iter``): number of iterations (default=500)
   * **Warning**: Although I could not find the description, ADS "**limits users to 5000 requests/day (on a rolling 24-hour window)**", and there is no way to circumvent this limit [Lockhart, K. 2023-03-07, priv. comm. via email through help desk].
