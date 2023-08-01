@@ -8,9 +8,9 @@ I created this script to reduce the time I waste on creating BibTeX files for mu
 Also, it is intended to be **run in the background** on my terminal while I crawl references on ADS. When I [add a paper to my library on ADS](http://adsabs.github.io/help/libraries/creating-libraries), this script automatically detects the change by checking the *last-modified timestamp* and updates the local BibTeX file accordingly.
 
 
-## First Step (One Time)
+## Installation
 
-**Installation**: clone this repo and
+Clone this repo and
 
     $ pip install -e .
 
@@ -52,12 +52,10 @@ Check if installed by printing all the help messages:
     ads2bibtex <library ID> -a bib_add.txt -o ../ysBach_PhDT_SNU/references.bib
     ```
 
+* Please read the message printed on terminal for more information.
 * *NOTE*: Paste your API token if asked. It will be saved as `.ads-token` file for later use.
 * *NOTE*: To update the token, simply `rm .ads-token`.
 
-This then downloads entry as bibtex, using ADS default format (the default ``-f bibtex``).
-
-For **different journals/formats other than BibTeX**, use `-f` (see `ads2bibtex -h`).
 
 ## "Additional" Entry
 There are things that are **not registered to ADS**. If you have an additional file for them:
@@ -108,15 +106,19 @@ URL= {http://gcpsj.sdf-eu.org/catalogo.html},
 
 
 ## Journal Names
-You want the **full name** of the journals? Use `-j full` to make ``\apj`` → ``Astrophysicial Journal``:
+For **different journals/formats** other than BibTeX **when querying from the ADS**, use `-f` (see `ads2bibtex -h`).
+
+``\apj`` → ``Astrophysicial Journal`` (full name):
 
     ads2bibtex <library ID> -o outputdir/references.bib -j full
 
-You want **ISO4 style**? You need to install `nltk` and use `-j iso4` to make ``\apj`` → ``Astrophys. J.``:
+``\apj`` → ``Astrophys. J.`` (ISO-4 style):
 
     ads2bibtex <library ID> -o outputdir/references.bib -j iso4
 
-These are useful for, e.g., non-astronomy specific journals like Nature/Science (or even thesis).
+(You need to install `nltk` to use `-j iso4`)
+
+ISO-4 is useful for, e.g., non-astronomy specific journals like Nature/Science (I actually made this for my thesis).
 
 
 ## Less Useful Functionalities
