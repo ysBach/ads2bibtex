@@ -153,7 +153,7 @@ def read_sort_bib_ads(fname, sort=False):
         # First, ignore all comment (# or %) parts
         _bibs = re.sub(r"\s?[#%](.)*\s?\n", "\n", _bibs)
         # Second, split if more than 2 are in one line (comma-separated)
-        _bibs = re.sub('\s?,\s?', '\n', _bibs)
+        _bibs = re.sub(r"\s?,\s?", "\n", _bibs)
         # Third, remove trailing white space (not necessary but...)
         _bibs = re.sub(r"\s?\n", "\n", _bibs)
         _bibs.replace(' ', '')
@@ -241,6 +241,7 @@ def query_ads(bibcodes, token, options=dict(sort="date asc"), fmt="bibtex",
                  "Content-type": "application/json"},
         data=json.dumps(options)
     )
+
     try:
         raw = r.json()["export"]
     except KeyError:
@@ -294,7 +295,7 @@ def make_rawfile(bibtex_ads, rawfile):
         elif line.startswith("author ="):
             line = line.split(" = {")[1][:-2]
             lasts = re.findall("[^{}]*(?=\})", line)
-            lasts = [l for l in lasts if l]
+            lasts = [_l for _l in lasts if _l]
             if len(lasts) > 3:
                 auths.append(lasts[0] + f"+{len(lasts) - 1}")
             elif len(lasts) > 1:  # 2 or 3
