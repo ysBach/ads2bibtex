@@ -2,7 +2,6 @@ import argparse
 import json
 import time
 from datetime import datetime
-from pathlib import Path
 
 from colorama import Back, Fore, Style
 
@@ -99,9 +98,9 @@ def main(args=None):
     args = parser.parse_args(args)
     print(args)
 
-    print("Done.\nToken checking: ", end="")
+    print("Done.\nToken checking ... ", end="")
     token = _check_token()
-    print("Done.\nInitial query test: ", end="")
+    print("Done.\nInitial query testing ... ", end="")
     arg_ads = args.lib_or_file
     # if Path(arg_ads).exists():  # If you gave a file with ADS bibcodes
     #     bibs_old = read_sort_bib_ads(arg_ads)  # only the bibcodes
@@ -110,7 +109,7 @@ def main(args=None):
     #   bibs, last_modified = query_lib(arg_ads, token=token)
 
     bibs_old, last_modified_old, name = query_lib(arg_ads, token=token)
-    print("Done.\nUpdating the files...")
+    print("Done.\nUpdating the files ...")
     arg_add = args.additional_file
     adds_old, adds2_old = read_bib_add(arg_add)  # the raw file content & list of citekeys
     rawfile = None if args.rawfile == "none" else args.rawfile
