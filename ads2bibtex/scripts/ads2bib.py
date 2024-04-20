@@ -68,7 +68,7 @@ def main(args=None):
                               )
                         )
     parser.add_argument("-f", "--format", default="bibtex", type=str,
-                        help=("The format of the output from the ADS library. Default `ads`. "
+                        help=("The format of the output from the ADS library. Default `bibtex`. "
                               + "Options are tagged formats (ads, bibtex, bibtexabs, "
                               + "endnote, medlars, procite, refworks, ris), "
                               + "LaTeX formats (aastex, icarus, mnras, soph), "
