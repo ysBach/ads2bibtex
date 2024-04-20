@@ -68,10 +68,9 @@ def main(args=None):
                               )
                         )
     parser.add_argument("-f", "--format", default="bibtex", type=str,
-                        help=("The format of the `journal` in bibliography item when "
-                              + "downloading the library from ADS. Options are "
-                              + "tagged formats (ads, bibtex, bibtexabs, endnote, medlars, "
-                              + "procite, refworks, ris), "
+                        help=("The format of the output from the ADS library. Default `ads`. "
+                              + "Options are tagged formats (ads, bibtex, bibtexabs, "
+                              + "endnote, medlars, procite, refworks, ris), "
                               + "LaTeX formats (aastex, icarus, mnras, soph), "
                               + "and XML formats (dcxml, refxml, refabsxml, rss, votable). "
                               + "Any other string will be understood as `custom` "
